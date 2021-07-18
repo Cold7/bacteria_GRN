@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>GRN</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body style = "margin-top : 2em; height: 100%;">
+
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<!--<h3 class="text-center">
+					Fancy title here.
+				</h3>-->
+				<div class="tabbable" id="tabs-331736" style = "margin-bottom: 2em;">
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							<a class="nav-link active show" href="#tab1"  onclick="displayDiv('about');"  data-toggle="tab">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#tab2" onclick="displayDiv('filter');" data-toggle="tab">Filter Network</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#tab3" onclick="displayDiv('download');" data-toggle="tab">Download Networks</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#tab4" onclick="displayDiv('help');" data-toggle="tab">Help</a>
+						</li>
+					</ul>
+				</div>
+				<div class="row" id="container">
+					<div id="about" class="col-md-12"></div>
+					<div id="filter" style = "display:none" class="col-md-12"></div>
+					<div id="download" style = "display:none" class="col-md-12"></div>
+					<div id="help" style = "display:none" class="col-md-12"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/cytoscape.min.js"></script>
+	<script>
+		$(document).ready(function(){ 
+			$("#about").load( "pages/about.html" );
+			$("#filter").load( "pages/filter_network.html" );
+			$("#download").load( "pages/download_network.html" );
+			$("#help").load( "pages/help.html" );
+		}) 
+	</script>
+  </body>
+</html>

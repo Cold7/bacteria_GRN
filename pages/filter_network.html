@@ -1,0 +1,426 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="tabbable" id="tabs-894659">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active show" href="#network_tab" data-toggle="tab">Load network</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#node_tab" data-toggle="tab">Nodes</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#edge_tab" data-toggle="tab">Edges</a>
+					</li>
+				</ul>
+				<div class="tab-content" >
+					</br>
+					<div class="tab-pane active" id="network_tab">
+						<!-- Load network tab-->
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-12">
+									<form role="form">
+										<div class="form-group">
+											
+											<label for="organism">
+												Select Network
+											</label>
+											<div id="select_organism">
+												<select id="organism" class="form-control">
+													<option selected disabled>Loading options</option>
+												</select>
+											</div>
+											</br>
+											<div>
+												<input type="checkbox" id="loadUnconnectedNodes" checked>
+												<label class="form-check-label" for="exampleCheck1">Load disconnected nodes</label>
+											</div>
+										</div>
+										<button type="button" class="btn btn-primary btn-block" onclick="loadNetwork($('#organism').val());">
+											Load 
+										</button>
+										
+									</form>
+									<div class="row">
+										<div class="col-md-12" id="networkLayout" style="Display:none; margin-top:1em;">
+											<div>
+												<form role="form">
+													<div class="form-group">
+														<label for="organism">
+															Apply a layout
+														</label>
+														<div id="select_layout">
+															<!--https://blog.js.cytoscape.org/2020/05/11/layouts/-->
+															<select id="layout" class="form-control">
+																<option value="random" selected>Random</option>
+																<option value="grid" >Grid</option>
+																<option value="circle" >Circle</option>
+																<option value="concentric" >Concentric</option>
+																<option value="breadthfirst" >Breadthfirst</option>
+																<option value="cose" >Cose</option>
+															</select>
+														</div>
+			
+													</div>
+													<button type="button" class="btn btn-primary btn-block" onclick="applyLayout();">
+														Apply layout 
+													</button>
+												</form>												
+											</div>
+											<div style="margin-top:1em;">
+												<form role="form">
+													<div class="form-group">
+														<label for="organism">
+															Additional options
+														</label>
+														<div id="additional_options">
+															<select id="additional" class="form-control">
+																<option value="1" selected>New graph from selected edges</option>
+																<option value="2" >New graph from selected nodes (edges among them)</option>
+																<option value="3" >New graph from selected nodes (all edges)</option>
+																
+															</select>
+														</div>
+			
+													</div>
+													<button type="button" class="btn btn-primary btn-block" onclick="applyOption();">
+														Apply Option 
+													</button>
+												</form>	
+												<br><br><br><br><br><br>
+												<div class="row">
+													<div class="col-md-6">
+														<button id="centerNetwork" type="button" class="btn btn-secondary btn-block" onclick="centerNetwork();">
+															Center network
+														</button>	
+													</div>
+													<div class="col-md-6">
+														<button id="fitNetwork" type="button" class="btn btn-secondary btn-block" onclick="fitNetwork();">
+															Fit network
+														</button>	
+													</div>				
+												</div>
+												</br>
+												<button id="resetNetwork" type="button" class="btn btn-warning btn-block" onclick="resetNetworkView();">
+													Reset visualization
+												</button>	
+												<button id="downloadVisualizedNetwork" type="button" class="btn btn-success btn-block" onclick="element.click();">
+													Download visualized network
+												</button>																							
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="tab-pane" id="node_tab">
+						<!-- node properties tab-->
+						<center><h4>Selecting nodes</h4></center>
+						</br>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-5">
+									<input type="text" id="searchNode" placeholder="E.g. dnaA." size = "18">
+								</div>
+								<div class="col-md-4">
+									<div id="select_node_property">
+										<select id="node_property_search" class="form-control">
+											<option value="original_gene_id" selected>NCBI Gene ID</option>
+											<option value="gene_name" >Gene name</option>
+											<option value="protein_id" >Protein ID</option>						
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div id="select_node_condition">
+										<select id="node_condition_search" class="form-control">
+											<option value="contain" selected>Contain</option>
+											<option value="is" >Is</option>							
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>	
+						</br>
+						<button type="button" class="btn btn-primary btn-block" onclick="selectNodes();">
+							Select nodes
+						</button>
+						</br>
+						<div class="row">
+							<div class="col-md-6">
+								<button type="button" class="btn btn-secondary btn-block" onclick="selectAllNodes();">
+									Select all nodes
+								</button>
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-secondary btn-block" onclick="unselectAllNodes();">
+									Unselect all nodes
+								</button>
+							</div>
+						</div>
+						</br></br></br></br>
+						<center><h4>Apply a style for selected nodes</h4></center>
+						</br>
+						<form role="form">
+							<div class="form-group">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-4">
+											<label for="organism">
+												Change node color
+											</label>
+										</div>
+										<div class="col-md-8">
+											<div id="select_node_color">
+												<input type="color" id="node_color" value="#ff0000" class="form-control">
+											</div>
+										</div>
+									</div>
+								</div>
+								</br>
+								<div class="form-group">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-4">
+												<label for="organism">
+													Node shape
+												</label>
+											</div>
+											<div class="col-md-8">
+												<div id="select_node_shape">
+													<select id="node_shape" class="form-control">
+														<option value="" selected>No change node shape</option>
+														<option value="ellipse" >Ellipse</option>
+														<option value="triangle" >Triangle</option>
+														<option value="round-triangle" >Round-triangle</option>
+														<option value="rectangle" >Rectangle</option>
+														<option value="round-rectangle" >Round-rectangle</option>
+														<option value="bottom-round-rectangle" >Bottom-round-rectangle</option>
+														<option value="cut-rectangle" >Cut-rectangle</option>
+														<option value="barrel" >Barrel</option>
+														<option value="diamond" >Diamond</option>
+														<option value="round-diamond" >Round-diamond</option>
+														<option value="pentagon" >Pentagon</option>
+														<option value="round-pentagon" >Round-pentagon</option>
+														<option value="hexagon" >Hexagon</option>
+														<option value="round-hexagon" >Round-hexagon</option>
+														<option value="concave-hexagon" >Concave-hexagon</option>
+														<option value="heptagon" >Heptagon</option>
+														<option value="round-heptagon" >Round-heptagon</option>
+														<option value="octagon" >Octagon</option>
+														<option value="round-octagon" >Round-octagon</option>
+														<option value="star" >Star</option>
+														<option value="tag" >Tag</option>
+														<option value="round-tag" >Round-tag</option>
+														<option value="vee" >Vee</option>								
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button type="button" class="btn btn-primary btn-block" onclick="paintNode();">
+								Apply style for selected nodes
+							</button>
+						</form>							
+					</div>
+					<div class="tab-pane" id="edge_tab">
+						<!-- edge properties tab-->
+						<center><h4>Selecting edges</h4></center>
+						</br>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-5">
+									<input type="text" id="searchEdge" placeholder="E.g. Known." size="18">
+								</div>
+								<div class="col-md-4">
+									<div id="select_edge_property">
+										<select id="edge_search_property" class="form-control">
+											<option value="source_node" selected>Source node</option>
+											<option value="target_node">Target node</option>
+											<option value="edge_name" >Edge name</option>
+											<option value="edge_type" >Edge type</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div id="select_edge_condition">
+										<select id="edge_search_condition" class="form-control">
+											<option value="contain" selected>Contain</option>
+											<option value="is" >Is</option>							
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>	
+						</br>
+						<button type="button" class="btn btn-primary btn-block" onclick="selectEdges();">
+							Select edges
+						</button>
+						</br>
+						<div class="row">
+							<div class="col-md-6">
+								<button type="button" class="btn btn-secondary btn-block" onclick="selectAllEdges();">
+									Select all edges
+								</button>
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-secondary btn-block" onclick="unselectAllEdges();">
+									Unselect all edges
+								</button>
+							</div>
+						</div>
+						</br></br></br></br>
+						<center><h4>Apply a style for selected edges</h4></center>
+						</br>
+						<form role="form">
+							<div class="form-group">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-4">
+											<label for="organism">
+												Change edge color
+											</label>
+										</div>
+										<div class="col-md-8">
+											<div id="select_node_color">
+												<input type="color" id="edge_color" value="#ff0000" class="form-control">
+											</div>										
+										</div>
+									</div>
+								</div>
+							</div>
+							<button type="button" class="btn btn-primary btn-block" onclick="paintEdge();">
+								Apply style for selected edges
+							</button>
+						</form>							
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8" style="width:auto; ">
+			<div class="row">
+				<div class="col-md-12" style="width: 180vh; height: 50vh; border:1px solid black;" id="netView">
+						No network selected
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style = "display: block; position: relative; width:auto; height: 40vh; overflow: auto; margin-top:1em;">
+					<div class="col-md-12">
+						<div class="tabbable" id="tab_node_edges">
+							<ul class="nav nav-tabs">
+								<li class="nav-item">
+									<a class="nav-link active show" href="#node_select_tab" data-toggle="tab">Node</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#edge_select_tab" data-toggle="tab">Edges</a>
+								</li>
+							</ul>
+							<div class="tab-content" >
+								</br>
+								<div class="tab-pane active" id="node_select_tab">
+									<!-- node select tab -->
+									<table class="table">
+										<thead>
+											<tr>
+												<th>
+													
+												</th>
+												<th>
+													NCBI Gene ID
+												</th>
+												<th>
+													Gene name
+												</th>
+												<th>
+													Protein id
+												</th>
+												<th>
+													Coord. 1
+												</th>
+												<th>
+													Coord. 2
+												</th>
+												<th>
+													Strand
+												</th>
+											</tr>
+										</thead>
+										<tbody id="nodeTBody">
+
+										</tbody>
+									</table>			
+								</div>
+								<div class="tab-pane" id="edge_select_tab">
+										<!-- edge select tab tab-->
+									<table class="table">
+										<thead>
+											<tr>
+												<th>
+												</th>
+												<th>
+													Source node
+												</th>
+												<th>
+													Target node
+												</th>
+												<th>
+													Edge name
+												</th>
+												<th>
+													Edge type
+												</th>
+												<th>
+													Target strand
+												</th>
+											</tr>
+										</thead>
+										<tbody id="edgeTBody">
+
+										</tbody>
+									</table>										
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="modal_loading" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModalLabel">
+						Loading Netwok
+					</h5> 
+				</div>
+				<div class="modal-body">
+					Please be patient while the netwok is loading...
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	$( document ).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: 'pages/php/query_nets.php',
+           // data: {servername:servername, username:username,password:password},
+            success: function(response)
+            {
+				$("#select_organism").html(response);
+           },
+           error : function (response) {
+				alert("Problem querying for organism. Try reloading the page");
+		   }
+       });		
+	});
+
+</script>

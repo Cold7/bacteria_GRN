@@ -1,0 +1,10 @@
+# Este documento describe cada una de las columnas encontradas en los archivos con sufijo  "genomic_extended_network_plus_TU.txt"
+1.-Número asignado como identificador. Si la interacción es encontrada en la red modificada se hace uso del mismo dígito, de lo contrario, si se considera que la interacción es "nueva" (interacción que se ha predicho) se asigna un dígito (comenzando en 1) y se define su estatus "_new"
+2.-Factor de transcripción (TF)
+3.-Elemento regulado ("Target" o TG)
+4.-Categoria que describe si la interacción es conocida ("Known") o fue predicha ("New")
+5.-Organismos donde se encontraron ortólogos tanto para el TF y TG de la actual interacción
+6.-Identificador donde puede encontarse la interacción "homóloga" de la actual que son descritas en las repectivas redes modificadas de los organismos dichos en 5.-
+7.-Número total de organismos en donde se encontró una interacción equivalente a la actual
+8.-Indica si el Target ("strand") es "Forward" o "Reverse", de acuerdo a otro archivo describiendo las unidades transcripcionales (TUs) del organismo en cuestión
+9.-Indica si el Target fue encontrado en el archivo de las TUs (_tu). Adicionalmente, un número (comenzando en 1) fue asignado para identificar targets perteneciendo a la misma TU
